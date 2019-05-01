@@ -6,10 +6,7 @@
 //  Copyright © 2019 Livia Vasconcelos. All rights reserved.
 //
 
-import Foundation
-import ObjectMapper
-
-public class Image: Codable, Mappable {
+public class Image: Codable {
     
     var url: String?
     var context: String?
@@ -25,15 +22,7 @@ public class Image: Codable, Mappable {
         self.height     = height
     }
     
-    required public init?(map: Map) {
-        
-    }
-    
-    public func mapping(map: Map) {
-        url        <- map["url"]
-        context    <- map["context"]
-        repeatable <- map["repeatable"]
-        width      <- map["width"]
-        height     <- map["height"]
+    enum CodingKeys: String, CodingKey {
+        case url, context, repeatable, width, height
     }
 }

@@ -6,10 +6,7 @@
 //  Copyright © 2019 Livia Vasconcelos. All rights reserved.
 //
 
-import Foundation
-import ObjectMapper
-
-public class OpeningHours: Codable, Mappable {
+public class OpeningHours: Codable {
     
     var day: Int?
     var timeFrom: String?
@@ -21,13 +18,7 @@ public class OpeningHours: Codable, Mappable {
         self.timeTo   = timeTo
     }
     
-    required public init?(map: Map) {
-        
-    }
-    
-    public func mapping(map: Map) {
-        day      <- map["day"]
-        timeFrom <- map["timeFrom"]
-        timeTo   <- map["timeTo"]
+    enum CodingKeys: String, CodingKey {
+        case day, timeFrom, timeTo
     }
 }

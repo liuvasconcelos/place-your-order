@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import ObjectMapper
 
-public class CompanyInformation: Codable, Mappable {
+public class CompanyInformation: Codable {
+    let decoder = JSONDecoder()
     
     var numericalId: Int?
     var latitude: String?
@@ -27,10 +27,10 @@ public class CompanyInformation: Codable, Mappable {
     
     init(numericalId: Int, latitude: String, longitude: String, openingTimes: [OpeningHours], images: [Image], address: String, id: String, categories: [Category],
          displayName: String, name: String, menuBrand: String, menus: [Menu], brand: String) {
+        
         self.numericalId  = numericalId
         self.latitude     = latitude
         self.longitude    = longitude
-        self.openingTimes = openingTimes
         self.images       = images
         self.address      = address
         self.id           = id
@@ -40,26 +40,18 @@ public class CompanyInformation: Codable, Mappable {
         self.menuBrand    = menuBrand
         self.menus        = menus
         self.brand        = brand
+        self.openingTimes = openingTimes
     }
     
-    required public init?(map: Map) {
-        
+    enum CodingKeys: String, CodingKey {
+        case numericalId, address, id, categories, displayName, name, menus, brand
+        case latitude     = "geoLat"
+        case longitude    = "geoLon"
+        case openingTimes = "openingTimes.weekday"
+        case images       = "image"
+        case menuBrand    = "menu"
     }
+
     
-    public func mapping(map: Map) {
-        numericalId  <- map["numericalId"]
-        latitude     <- map["geoLat"]
-        longitude    <- map["geoLon"]
-        openingTimes <- map["openingTimes.weekday"]
-        images       <- map["image"]
-        address      <- map["address"]
-        id           <- map["id"]
-        categories   <- map["categories"]
-        displayName  <- map["displayName"]
-        name         <- map["name"]
-        menuBrand    <- map["menu"]
-        menus        <- map["menus"]
-        brand        <- map["brand"]
-    }
 }
 

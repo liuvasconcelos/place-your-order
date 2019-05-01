@@ -6,10 +6,7 @@
 //  Copyright © 2019 Livia Vasconcelos. All rights reserved.
 //
 
-import Foundation
-import ObjectMapper
-
-public class Menu: Codable, Mappable {
+public class Menu: Codable {
     
     var numericalId: Int?
     var id: String?
@@ -20,14 +17,8 @@ public class Menu: Codable, Mappable {
         self.id          = id
         self.categories  = categories
     }
-    
-    required public init?(map: Map) {
-        
-    }
-    
-    public func mapping(map: Map) {
-        numericalId <- map["numericalId"]
-        id          <- map["id"]
-        categories  <- map["categories"]
+   
+    enum CodingKeys: String, CodingKey {
+        case numericalId, id, categories
     }
 }

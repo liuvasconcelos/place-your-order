@@ -26,6 +26,7 @@ class LoadRestaurantProductsByCompanyIdApiDataSourceTest: QuickSpec {
         describe("#loadProducts") {
             var result: ProductList?
             var successCallback = false
+            var emptyCallback   = false
             var failCallBack    = false
             
             let loadProductsAction: Action = Action() {
@@ -38,6 +39,9 @@ class LoadRestaurantProductsByCompanyIdApiDataSourceTest: QuickSpec {
                             successCallback = true
                         })
                         
+                        callback.onEmptyData {
+                            emptyCallback = true
+                        }
                         callback.onFailed({ (error) in
                             failCallBack = true
                         })

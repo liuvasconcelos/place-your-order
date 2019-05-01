@@ -8,7 +8,12 @@
 
 import Foundation
 
-public class RemoteUtils{
+public struct RemoteUtils {
+    
+    public static let companyPath = "/v1/mobile/company/"
+    public static func productsPath(companyId: Int) -> String {
+      return "/v2/mobile/company/\(companyId)/products"
+    }
     
     public static func buildUrl(_ path: String) -> String {
         return "https://api.staging.onyo.com\(path)"

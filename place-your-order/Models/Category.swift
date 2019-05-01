@@ -6,10 +6,7 @@
 //  Copyright © 2019 Livia Vasconcelos. All rights reserved.
 //
 
-import Foundation
-import ObjectMapper
-
-public class Category: Codable, Mappable {
+public class Category: Codable {
     
     var numericalId: Int?
     var name: String?
@@ -28,18 +25,8 @@ public class Category: Codable, Mappable {
         self.image       = image
         self.order       = order
     }
-    
-    required public init?(map: Map) {
-        
-    }
-    
-    public func mapping(map: Map) {
-        numericalId <- map["numericalId"]
-        name        <- map["name"]
-        parent      <- map["parent"]
-        brand       <- map["brand"]
-        id          <- map["id"]
-        image       <- map["image"]
-        order       <- map["order"]
+  
+    enum CodingKeys: String, CodingKey {
+        case numericalId, name, parent, brand, id, image, order
     }
 }

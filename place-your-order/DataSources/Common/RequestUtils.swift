@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 
 struct RequestUtils {
     
-    public static func getRequest(path: String, method: HTTPMethod) -> URLRequest {
+    public static func buildRequest(path: String, method: HTTPMethod) -> URLRequest {
         let urlRequest = RemoteUtils.buildUrl(path)
         var request    = URLRequest(url: URL(string: urlRequest)!)
         
