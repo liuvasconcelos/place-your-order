@@ -10,5 +10,6 @@ import Foundation
 
 public protocol RestaurantApiDataSource: class {
     func loadRestaurantInformationBy(id: Int, _ callback: @escaping (BaseCallback<CompanyInformation>) -> Void)
+    func loadRestaurantProductsBy(companyId: Int, _ callback: @escaping (BaseCallback<ProductList>) -> Void)
 }
 

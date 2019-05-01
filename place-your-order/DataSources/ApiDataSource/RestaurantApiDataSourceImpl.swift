@@ -31,6 +31,26 @@ public class RestaurantApiDataSourceImpl: RestaurantApiDataSource {
             }
         }
     }
+    
+    public func loadRestaurantProductsBy(companyId: Int, _ callback: @escaping (BaseCallback<ProductList>) -> Void) {
+        let path = "/v2/mobile/company/\(companyId)/products"
+        let request = RequestUtils.getRequest(path: path, method: .get)
+        
+        Alamofire.request(request).validate(statusCode: 200..<299).responseObject { (response: DataResponse<ProductList>) in
+            switch response.result {
+            case .success:
+                if let response = response.result.value {
+                    let callbackSuccess = BaseCallback.success(response)
+                    callback(callbackSuccess)
+                }
+                
+            case .failure(let error):
+                let callbackFailed = BaseCallback<ProductList>.failed(error: error.localizedDescription)
+                callback(callbackFailed)
+            }
+        }
+    }
+    
 }
 
 
